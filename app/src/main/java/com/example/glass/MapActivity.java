@@ -73,15 +73,32 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mapApi = googleMap;
 
         LatLng Dorado = new LatLng(19.058751, -98.126840);
+        LatLng Fuck = new LatLng(19.071399, -98.173273);
+        LatLng Fuck1 = new LatLng(19.030992, -98.233845);
+        LatLng Fuck2 = new LatLng(19.045136, -98.190505);
+        LatLng Fuck3 = new LatLng(19.027700, -98.203780);
 
-        mapApi.addMarker(new MarkerOptions().position(Dorado).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+        MarkerOptions One = MarkV(Dorado, BitmapDescriptorFactory.HUE_RED);
+        MarkerOptions Two = MarkV(Fuck, BitmapDescriptorFactory.HUE_GREEN);
+        MarkerOptions Three = MarkV(Fuck1, BitmapDescriptorFactory.HUE_GREEN);
+        MarkerOptions Four = MarkV(Fuck2, BitmapDescriptorFactory.HUE_GREEN);
+        MarkerOptions Five = MarkV(Fuck3, BitmapDescriptorFactory.HUE_GREEN);
+
+        mapApi.addMarker(One);
+        mapApi.addMarker(Two);
+        mapApi.addMarker(Three);
+        mapApi.addMarker(Four);
+        mapApi.addMarker(Five);
+
         mapApi.moveCamera(CameraUpdateFactory.newLatLng(Dorado));
+        mapApi.moveCamera(CameraUpdateFactory.newLatLng(Fuck));
+        mapApi.moveCamera(CameraUpdateFactory.newLatLng(Fuck1));
+        mapApi.moveCamera(CameraUpdateFactory.newLatLng(Fuck2));
+        mapApi.moveCamera(CameraUpdateFactory.newLatLng(Fuck3));
     }
 
-    public BitmapDescriptor getMarkerIcon(String color) {
-        float[] hsv = new float[3];
-        Color.colorToHSV(Color.parseColor(color), hsv);
-        return BitmapDescriptorFactory.defaultMarker(hsv[0]);
+    private MarkerOptions MarkV(LatLng Star, float Covenant){
+        return new MarkerOptions().position(Star).icon(BitmapDescriptorFactory.defaultMarker(Covenant));
     }
 
     private class ReadInput implements Runnable {
@@ -115,6 +132,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                         for (i = 0; i < buffer.length && buffer[i] != 0; i++) {
                         }
                         final String strInput = new String(buffer, 0, i);
+                        Log.d(TAG, strInput);
 
                         /*
                          * If checked then receive text, better design would probably be to stop thread if unchecked and free resources, but this is a quick fix
