@@ -46,8 +46,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     final static String on="92";//on
     final static String off="79";//off
 
-    public String SuckItAndSee;
-
     public MarkerOptions One;
     public MarkerOptions Two;
     public MarkerOptions Three;
@@ -139,17 +137,92 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                          */
                         for (i = 0; i < buffer.length && buffer[i] != 0; i++) {
                         }
-                        SuckItAndSee = new String(buffer, 0, i);
+                        final String SuckItAndSee = new String(buffer, 0, i);
                         Log.d(TAG, SuckItAndSee);
                         /*
                          * If checked then receive text, better design would probably be to stop thread if unchecked and free resources, but this is a quick fix
                          */
-                        if(SuckItAndSee.contains("d")){
+                        if(SuckItAndSee.contains("d") && !SuckItAndSee.contains("a") && !SuckItAndSee.contains("s")){
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
                                     mapApi.addMarker(One).showInfoWindow();
+                                    Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
+                                    //mapApi.addMarker(Two).showInfoWindow();
+                                    Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
+                                    //mapApi.addMarker(Three).showInfoWindow();
+                                }
+                            });
+                        }
+                        else if (SuckItAndSee.contains("d") && SuckItAndSee.contains("a") && !SuckItAndSee.contains("s")){
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
+                                    mapApi.addMarker(One).showInfoWindow();
+                                    Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
+                                    mapApi.addMarker(Two).showInfoWindow();
+                                    Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
+                                }
+                            });
+                        }
+                        else if (!SuckItAndSee.contains("d") && SuckItAndSee.contains("a") && !SuckItAndSee.contains("s")){
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
+                                    Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
+                                    mapApi.addMarker(Two).showInfoWindow();
+                                    Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
+                                }
+                            });
+                        }
+                        else if (!SuckItAndSee.contains("d") && !SuckItAndSee.contains("a") && SuckItAndSee.contains("s")){
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
+                                    Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
+                                    Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
+                                    mapApi.addMarker(Three).showInfoWindow();
+                                }
+                            });
+                        }
+                        else if (!SuckItAndSee.contains("d") && SuckItAndSee.contains("a") && SuckItAndSee.contains("s")){
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
+                                    mapApi.addMarker(One).showInfoWindow();
+                                    Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
+                                    Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
+                                    mapApi.addMarker(Three).showInfoWindow();
+                                }
+                            });
+                        }
+                        else if (SuckItAndSee.contains("d") && !SuckItAndSee.contains("a") && SuckItAndSee.contains("s")){
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
+                                    Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
+                                    mapApi.addMarker(Two).showInfoWindow();
+                                    Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
+                                    mapApi.addMarker(Three).showInfoWindow();
+                                }
+                            });
+                        }
+                        else if (SuckItAndSee.contains("d") && SuckItAndSee.contains("a") && SuckItAndSee.contains("s")){
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
+                                    mapApi.addMarker(One).showInfoWindow();
+                                    Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
+                                    mapApi.addMarker(Two).showInfoWindow();
+                                    Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
+                                    mapApi.addMarker(Three).showInfoWindow();
                                 }
                             });
                         }
@@ -159,6 +232,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                 public void run() {
                                     One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
                                     mapApi.addMarker(One).showInfoWindow();
+                                    Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
+                                    mapApi.addMarker(Two).showInfoWindow();
+                                    Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
+                                    mapApi.addMarker(Three).showInfoWindow();
                                 }
                             });
                         }
