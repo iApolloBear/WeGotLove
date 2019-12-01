@@ -147,11 +147,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                 @Override
                                 public void run() {
                                     One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
-                                    mapApi.addMarker(One).showInfoWindow();
                                     Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
-                                    //mapApi.addMarker(Two).showInfoWindow();
                                     Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
-                                    //mapApi.addMarker(Three).showInfoWindow();
+                                    mapApi.addMarker(One);
+                                    mapApi.addMarker(Two);
+                                    mapApi.addMarker(Three);
                                 }
                             });
                         }
@@ -160,10 +160,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                 @Override
                                 public void run() {
                                     One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
-                                    mapApi.addMarker(One).showInfoWindow();
                                     Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
-                                    mapApi.addMarker(Two).showInfoWindow();
                                     Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
+                                    mapApi.addMarker(One);
+                                    mapApi.addMarker(Two);
+                                    mapApi.addMarker(Three);
                                 }
                             });
                         }
@@ -173,8 +174,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                 public void run() {
                                     One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
                                     Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
-                                    mapApi.addMarker(Two).showInfoWindow();
                                     Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
+                                    mapApi.addMarker(One);
+                                    mapApi.addMarker(Two);
+                                    mapApi.addMarker(Three);
                                 }
                             });
                         }
@@ -185,7 +188,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                     One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
                                     Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
                                     Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
-                                    mapApi.addMarker(Three).showInfoWindow();
+                                    mapApi.addMarker(One);
+                                    mapApi.addMarker(Two);
+                                    mapApi.addMarker(Three);
                                 }
                             });
                         }
@@ -193,11 +198,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
-                                    mapApi.addMarker(One).showInfoWindow();
+                                    One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
                                     Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
                                     Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
-                                    mapApi.addMarker(Three).showInfoWindow();
+                                    mapApi.addMarker(One);
+                                    mapApi.addMarker(Two);
+                                    mapApi.addMarker(Three);
                                 }
                             });
                         }
@@ -206,10 +212,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                 @Override
                                 public void run() {
                                     One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
-                                    Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
-                                    mapApi.addMarker(Two).showInfoWindow();
+                                    Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
                                     Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
-                                    mapApi.addMarker(Three).showInfoWindow();
+                                    mapApi.addMarker(One);
+                                    mapApi.addMarker(Two);
+                                    mapApi.addMarker(Three);
                                 }
                             });
                         }
@@ -218,11 +225,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                 @Override
                                 public void run() {
                                     One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
-                                    mapApi.addMarker(One).showInfoWindow();
                                     Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
-                                    mapApi.addMarker(Two).showInfoWindow();
                                     Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
-                                    mapApi.addMarker(Three).showInfoWindow();
+                                    mapApi.addMarker(One);
+                                    mapApi.addMarker(Two);
+                                    mapApi.addMarker(Three);
                                 }
                             });
                         }
@@ -231,11 +238,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                 @Override
                                 public void run() {
                                     One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
-                                    mapApi.addMarker(One).showInfoWindow();
                                     Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
-                                    mapApi.addMarker(Two).showInfoWindow();
                                     Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
-                                    mapApi.addMarker(Three).showInfoWindow();
+                                    mapApi.addMarker(One);
+                                    mapApi.addMarker(Two);
+                                    mapApi.addMarker(Three);
                                 }
                             });
                         }
