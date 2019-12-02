@@ -199,7 +199,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                 @Override
                                 public void run() {
                                     One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
-                                    Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
+                                    Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
                                     Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
                                     mapApi.addMarker(One);
                                     mapApi.addMarker(Two);
@@ -211,7 +211,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
+                                    One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
                                     Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
                                     Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
                                     mapApi.addMarker(One);
