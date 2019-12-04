@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View arg0) {
                 BluetoothDevice device = ((MyAdapter) (listView.getAdapter())).getSelectedItem();
                 Intent intent = new Intent(getApplicationContext(), MapActivity.class); //Si No Funciona Cambiar a Controlling.class
-                intent.putExtra(DEVICE_EXTRA, device);
+                intent.putExtra(DEVICE_EXTRA, "00:19:06:34:EF:34");
                 intent.putExtra(DEVICE_UUID, mDeviceUUID.toString());
                 intent.putExtra(BUFFER_SIZE, mBufferSize);
                 startActivity(intent);

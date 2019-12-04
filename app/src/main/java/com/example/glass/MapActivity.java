@@ -15,6 +15,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -29,7 +30,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
 
-public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     private static final String TAG = "BlueTest5-Controlling";
     private int mMaxChars = 50000;//Default//change this to string..........
     private UUID mDeviceUUID;
@@ -51,7 +52,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     public MarkerOptions Three;
     public MarkerOptions Four;
     public MarkerOptions Five;
-    public LatLng Dorado;
+
+    public Marker Uno;
+    public Marker Dos;
+    public Marker Tres;
 
     private ProgressDialog progressDialog;
     GoogleMap mapApi;
@@ -77,7 +81,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mapApi = googleMap;
-        Dorado = new LatLng(19.058751, -98.126840);
+        LatLng Dorado = new LatLng(19.058751, -98.126840);
         LatLng Fuck = new LatLng(19.071399, -98.173273);
         LatLng Fuck1 = new LatLng(19.030992, -98.233845);
         LatLng Fuck2 = new LatLng(19.045136, -98.190505);
@@ -89,22 +93,27 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         Four = MarkV(Fuck2, BitmapDescriptorFactory.HUE_GREEN);
         Five = MarkV(Fuck3, BitmapDescriptorFactory.HUE_GREEN);
 
-        mapApi.addMarker(One);
-        mapApi.addMarker(Two);
-        mapApi.addMarker(Three);
+        Uno = mapApi.addMarker(One);
+        Dos = mapApi.addMarker(Two);
+        Tres = mapApi.addMarker(Three);
         mapApi.addMarker(Four);
         mapApi.addMarker(Five);
 
         mapApi.moveCamera(CameraUpdateFactory.newLatLng(Dorado));
-        mapApi.moveCamera(CameraUpdateFactory.newLatLng(Fuck));
-        mapApi.moveCamera(CameraUpdateFactory.newLatLng(Fuck1));
-        mapApi.moveCamera(CameraUpdateFactory.newLatLng(Fuck2));
-        mapApi.moveCamera(CameraUpdateFactory.newLatLng(Fuck3));
     }
+
 
 
     private MarkerOptions MarkV(LatLng Star, float Covenant){
         return new MarkerOptions().position(Star).icon(BitmapDescriptorFactory.defaultMarker(Covenant));
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        if(marker.equals(Uno)){
+            Toast.makeText(MapActivity.this, "Fuck", Toast.LENGTH_SHORT).show();
+        }
+        return true;
     }
 
     private class ReadInput implements Runnable {
@@ -149,9 +158,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                     One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
                                     Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
                                     Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
-                                    mapApi.addMarker(One);
-                                    mapApi.addMarker(Two);
-                                    mapApi.addMarker(Three);
+                                    Uno = mapApi.addMarker(One);
+                                    Dos = mapApi.addMarker(Two);
+                                    Tres = mapApi.addMarker(Three);
                                 }
                             });
                         }
@@ -162,9 +171,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                     One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
                                     Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
                                     Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
-                                    mapApi.addMarker(One);
-                                    mapApi.addMarker(Two);
-                                    mapApi.addMarker(Three);
+                                    Uno = mapApi.addMarker(One);
+                                    Dos = mapApi.addMarker(Two);
+                                    Tres = mapApi.addMarker(Three);
                                 }
                             });
                         }
@@ -175,9 +184,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                     One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
                                     Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
                                     Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
-                                    mapApi.addMarker(One);
-                                    mapApi.addMarker(Two);
-                                    mapApi.addMarker(Three);
+                                    Uno =  mapApi.addMarker(One);
+                                    Dos =  mapApi.addMarker(Two);
+                                    Tres = mapApi.addMarker(Three);
                                 }
                             });
                         }
@@ -188,9 +197,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                     One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
                                     Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
                                     Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
-                                    mapApi.addMarker(One);
-                                    mapApi.addMarker(Two);
-                                    mapApi.addMarker(Three);
+                                    Uno =  mapApi.addMarker(One);
+                                    Dos = mapApi.addMarker(Two);
+                                    Tres = mapApi.addMarker(Three);
                                 }
                             });
                         }
@@ -201,9 +210,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                     One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
                                     Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
                                     Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
-                                    mapApi.addMarker(One);
-                                    mapApi.addMarker(Two);
-                                    mapApi.addMarker(Three);
+                                    Uno = mapApi.addMarker(One);
+                                    Dos = mapApi.addMarker(Two);
+                                    Tres = mapApi.addMarker(Three);
                                 }
                             });
                         }
@@ -214,9 +223,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                     One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
                                     Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
                                     Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
-                                    mapApi.addMarker(One);
-                                    mapApi.addMarker(Two);
-                                    mapApi.addMarker(Three);
+                                    Uno = mapApi.addMarker(One);
+                                    Dos = mapApi.addMarker(Two);
+                                    Tres = mapApi.addMarker(Three);
                                 }
                             });
                         }
@@ -227,9 +236,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                     One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
                                     Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
                                     Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).snippet("No hay cajones").title("No Disponible");
-                                    mapApi.addMarker(One);
-                                    mapApi.addMarker(Two);
-                                    mapApi.addMarker(Three);
+                                    Uno = mapApi.addMarker(One);
+                                    Dos = mapApi.addMarker(Two);
+                                    Tres = mapApi.addMarker(Three);
                                 }
                             });
                         }
@@ -240,9 +249,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                     One.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
                                     Two.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
                                     Three.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).snippet("Cajones Disponibles").title("Disponible");
-                                    mapApi.addMarker(One);
-                                    mapApi.addMarker(Two);
-                                    mapApi.addMarker(Three);
+                                    Uno = mapApi.addMarker(One);
+                                    Dos = mapApi.addMarker(Two);
+                                    Tres = mapApi.addMarker(Three);
                                 }
                             });
                         }
@@ -343,7 +352,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         @Override
         protected void onPreExecute() {
 
-            progressDialog = ProgressDialog.show(MapActivity.this, "Hold on", "Connecting");// http://stackoverflow.com/a/11130220/1287554
+            progressDialog = ProgressDialog.show(MapActivity.this, "Espere...", "Conectando");// http://stackoverflow.com/a/11130220/1287554
 
         }
 
@@ -372,10 +381,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             super.onPostExecute(result);
 
             if (!mConnectSuccessful) {
-                Toast.makeText(getApplicationContext(), "Could not connect to device.Please turn on your Hardware", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "No Se Ha Podido Conectar", Toast.LENGTH_LONG).show();
                 finish();
             } else {
-                msg("Connected to device");
+                msg("Conectado");
                 mIsBluetoothConnected = true;
                 mReadThread = new MapActivity.ReadInput(); // Kick off input reader
             }
