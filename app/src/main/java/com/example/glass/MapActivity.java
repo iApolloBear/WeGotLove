@@ -1,5 +1,6 @@
 package com.example.glass;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 
@@ -81,6 +82,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mapApi = googleMap;
+        mapApi.setOnMarkerClickListener(this);
         LatLng Dorado = new LatLng(19.058751, -98.126840);
         LatLng Fuck = new LatLng(19.071399, -98.173273);
         LatLng Fuck1 = new LatLng(19.030992, -98.233845);
@@ -98,22 +100,29 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         Tres = mapApi.addMarker(Three);
         mapApi.addMarker(Four);
         mapApi.addMarker(Five);
-
+        Uno.setTag(Dorado);
         mapApi.moveCamera(CameraUpdateFactory.newLatLng(Dorado));
     }
-
-
 
     private MarkerOptions MarkV(LatLng Star, float Covenant){
         return new MarkerOptions().position(Star).icon(BitmapDescriptorFactory.defaultMarker(Covenant));
     }
 
     @Override
-    public boolean onMarkerClick(Marker marker) {
-        if(marker.equals(Uno)){
-            Toast.makeText(MapActivity.this, "Fuck", Toast.LENGTH_SHORT).show();
+    public boolean onMarkerClick(final Marker marker) {
+        if(marker.getPosition().equals(Uno.getPosition())){
+            Uno.showInfoWindow();
+            return true;
+        }else if (marker.getPosition().equals(Dos.getPosition())){
+            Dos.showInfoWindow();
+            return true;
+        } else if(marker.getPosition().equals(Tres.getPosition())){
+            Tres.showInfoWindow();
+            return true;
         }
-        return true;
+        else{
+            return false;
+        }
     }
 
     private class ReadInput implements Runnable {
