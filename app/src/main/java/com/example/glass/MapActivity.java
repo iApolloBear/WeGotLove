@@ -2,14 +2,22 @@ package com.example.glass;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,9 +34,17 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.UUID;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -40,23 +56,29 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
     private boolean mIsUserInitiatedDisconnect = false;
     private boolean mIsBluetoothConnected = false;
-
+    LocationManager locationManager;
+    LocationListener locationListener;
+    LatLng Current;
 
     private Button mBtnDisconnect;
     private BluetoothDevice mDevice;
 
-    final static String on="92";//on
-    final static String off="79";//off
+    final static String on = "92";//on
+    final static String off = "79";//off
 
     public MarkerOptions One;
     public MarkerOptions Two;
     public MarkerOptions Three;
     public MarkerOptions Four;
     public MarkerOptions Five;
+    public MarkerOptions Six;
 
     public Marker Uno;
     public Marker Dos;
     public Marker Tres;
+    public Marker User;
+
+    Polyline CurrentPolyLine;
 
     private ProgressDialog progressDialog;
     GoogleMap mapApi;
@@ -83,6 +105,32 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     public void onMapReady(GoogleMap googleMap) {
         mapApi = googleMap;
         mapApi.setOnMarkerClickListener(this);
+
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                Current = new LatLng(location.getLatitude(), location.getLongitude());
+                Six = MarkV(Current, BitmapDescriptorFactory.HUE_BLUE);
+                User = mapApi.addMarker(Six);
+            }
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+
+            }
+        };
+
         LatLng Dorado = new LatLng(19.058751, -98.126840);
         LatLng Fuck = new LatLng(19.071399, -98.173273);
         LatLng Fuck1 = new LatLng(19.030992, -98.233845);
@@ -102,6 +150,50 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         mapApi.addMarker(Five);
         Uno.setTag(Dorado);
         mapApi.moveCamera(CameraUpdateFactory.newLatLng(Dorado));
+        AskForPermissions();
+    }
+
+    private void AskForPermissions() {
+        Dexter.withActivity(this).withPermission(Manifest.permission.ACCESS_FINE_LOCATION).withListener(new PermissionListener() {
+            @Override
+            public void onPermissionGranted(PermissionGrantedResponse response) {
+                if (ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getBaseContext() ,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                Location lastLocation = getLastKnownLocation();
+                Current = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
+                Six = MarkV(Current, BitmapDescriptorFactory.HUE_BLUE);
+                User = mapApi.addMarker(Six);
+            }
+
+            @Override
+            public void onPermissionDenied(PermissionDeniedResponse response) {
+
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                token.continuePermissionRequest();
+            }
+        }).check();
+    }
+
+    private Location getLastKnownLocation() {
+        locationManager = (LocationManager)getApplicationContext().getSystemService(LOCATION_SERVICE);
+        List<String> providers = locationManager.getProviders(true);
+        Location bestLocation = null;
+        for (String provider : providers) {
+            Location l = locationManager.getLastKnownLocation(provider);
+            if (l == null) {
+                continue;
+            }
+            if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
+                // Found best last known location: %s", l);
+                bestLocation = l;
+            }
+        }
+        return bestLocation;
     }
 
     private MarkerOptions MarkV(LatLng Star, float Covenant){
@@ -111,7 +203,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     @Override
     public boolean onMarkerClick(final Marker marker) {
         if(marker.getPosition().equals(Uno.getPosition())){
-            Uno.showInfoWindow();
+            //String url = getUrl(User.getPosition(), Uno.getPosition(), "driving");
             return true;
         }else if (marker.getPosition().equals(Dos.getPosition())){
             Dos.showInfoWindow();
